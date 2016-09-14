@@ -11,13 +11,13 @@ class Form extends Component {
           </fieldset>
           <br></br>
           <fieldset className="days">
-            <input type="checkbox" className="day" name="day" ref="day" value="sun" /> Sunday<span> </span>
-            <input type="checkbox" className="day" name="day" ref="day" value="mon" /> Monday<span> </span>
-            <input type="checkbox" className="day" name="day" ref="day" value="tues" /> Tuesday<span> </span>
-            <input type="checkbox" className="day" name="day" ref="day" value="wed" />Wednesday<span> </span>
-            <input type="checkbox" className="day" name="day" ref="day" value="thurs" /> Thursday<span> </span>
-            <input type="checkbox" className="day" name="day" ref="day" value="fri" /> Friday<span> </span>
-            <input type="checkbox" className="day" name="day" ref="day" value="sat" /> Saturday<span> </span>
+            <input type="checkbox" className="day" name="day" ref="day" value="Sunday" /> Sunday<span> </span>
+            <input type="checkbox" className="day" name="day" ref="day" value="Monday" /> Monday<span> </span>
+            <input type="checkbox" className="day" name="day" ref="day" value="Tuesday" /> Tuesday<span> </span>
+            <input type="checkbox" className="day" name="day" ref="day" value="Wednesday" />Wednesday<span> </span>
+            <input type="checkbox" className="day" name="day" ref="day" value="Thursday" /> Thursday<span> </span>
+            <input type="checkbox" className="day" name="day" ref="day" value="Friday" /> Friday<span> </span>
+            <input type="checkbox" className="day" name="day" ref="day" value="Saturday" /> Saturday<span> </span>
           </fieldset>
           <br></br>
           <input type="submit" value="Submit"/>
