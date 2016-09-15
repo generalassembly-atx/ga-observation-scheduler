@@ -90,7 +90,7 @@ class Homepage extends Component {
         checked = true;
       }
     }
-    console.log('refs ', checked);
+    console.log('refs ', this);
     if (checked == true && this.refs.start !== '' && this.refs.end !== '') {
       // document.getElementById('form').submit();
       console.log('we good');
