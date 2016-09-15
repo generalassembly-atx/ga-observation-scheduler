@@ -107,6 +107,7 @@ class Homepage extends Component {
   }
 
   onPost(event) {
+    days = [];
     const form = document.getElementById('form');
     const course = form.courses.value;
 
