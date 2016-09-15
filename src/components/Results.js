@@ -24,6 +24,9 @@ class Results extends Component {
             <tr>
               <td>{this.props.fourth}</td>
             </tr>
+            <tr>
+              <td>{this.props.mid}</td>
+            </tr>
           </tbody>
         </table>
         <button className="btn btn-danger">Add to calendar</button>
