@@ -9,23 +9,23 @@ class Results extends Component {
 
     return (
       <div>
-        <h1>Results</h1>
+        <h3>Course: {this.props.course}</h3>
         <table className="table-bordered">
           <tbody>
             <tr>
-              <td>{this.props.first}</td>
+              <td>1st Observation Day: {this.props.first}</td>
             </tr>
             <tr>
-              <td>{this.props.second}</td>
+              <td>2nd Observation Day: {this.props.second}</td>
             </tr>
             <tr>
-              <td>{this.props.third}</td>
+              <td>3rd Observation Day: {this.props.third}</td>
             </tr>
             <tr>
-              <td>{this.props.fourth}</td>
+              <td>4th Observation Day: {this.props.fourth}</td>
             </tr>
             <tr>
-              <td>{this.props.mid}</td>
+              <td>Mid-Course Feedback: {this.props.mid}</td>
             </tr>
           </tbody>
         </table>

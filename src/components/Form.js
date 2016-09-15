@@ -7,7 +7,8 @@ class Form extends Component {
       <div>
         <form onSubmit={this.props.onPost} id="form">
           <fieldset className="course" onChange={this.props.checkForm.bind(this)}>
-            <select name="courses" form="form">
+            <select name="courses" form="form" ref="courses">
+              <option></option>
               <option value="Visual Design" ref="vd">Visual Design</option>
               <option value="Data Science" ref="ds">Data Science</option>
               <option value="FEWD" ref="fewd">FEWD</option>

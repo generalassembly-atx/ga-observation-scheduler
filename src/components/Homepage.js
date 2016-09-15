@@ -24,7 +24,8 @@ class Homepage extends Component {
       second: null,
       third: null,
       fourth: null,
-      mid: null
+      mid: null,
+      course: null
     };
   }
 
@@ -42,7 +43,6 @@ class Homepage extends Component {
   }
 
   checkSecondDay(day) {
-    console.log('checkSecond ', day.format('dddd, MMMM Do, YYYY'));
     let i = 0;
     while (i < daysInAWeek) {
       if (days.indexOf(day.format('dddd')) > -1) {
@@ -56,7 +56,6 @@ class Homepage extends Component {
   }
 
   checkFourthDay(day) {
-    console.log('checkFourth ', day.format('dddd, MMMM Do, YYYY'));
     let i = 0;
     while (i < daysInAWeek) {
       if (days.indexOf(day.format('dddd')) > -1) {
@@ -70,7 +69,6 @@ class Homepage extends Component {
   }
 
   checkThirdDay(day) {
-    console.log('checkThird ', day.format('dddd, MMMM Do, YYYY'));
     let i = 0;
     while (i < daysInAWeek) {
       if (days.indexOf(day.format('dddd')) > -1) {
@@ -84,7 +82,6 @@ class Homepage extends Component {
   }
 
   checkMid(day) {
-    console.log(day.format('dddd, MMMM Do, YYYY'));
     let i = 0;
     while (i < daysInAWeek) {
       if (days.indexOf(day.format('dddd')) > -1) {
@@ -104,13 +101,14 @@ class Homepage extends Component {
         checked = true;
       }
     }
-    if (checked == true && this.refs.start !== '' && this.refs.end !== '') {
+    if (checked == true && this.refs.start !== '' && this.refs.end !== '' && this.refs.courses.value !== '') {
       this.props.onPost();
     }
   }
 
   onPost(event) {
-    var form = document.getElementById('form');
+    const form = document.getElementById('form');
+    const course = form.courses.value;
 
     for (var i = 0; i < form.day.length; i++) {
       if (form.day[i].checked) {
@@ -119,12 +117,7 @@ class Homepage extends Component {
     }
     const day1 = moment(form.start.value);
     const day2 = moment(form.end.value);
-    // const firstOb = day1.add(4, 'days');
-    // const lastOb = day2.subtract(7, 'days');
-    console.log('day1 ', day1.format('dddd, MMMM Do, YYYY'), ' day2 ', day2.format('dddd, MMMM Do, YYYY'));
-    console.log('first ', day1.add(4, 'days').format('dddd, MMMM Do, YYYY'), ' last ', day2.subtract(7, 'days').format('dddd, MMMM Do, YYYY'));
     const diff = moment(form.end.value).diff(moment(form.start.value), 'days');
-    console.log(diff);
     const firstMoment = moment(form.start.value).add(4, 'days');
     const fourthMoment = moment(form.end.value).subtract(7, 'days');
     this.checkFirstDay(moment(form.start.value).add(4, 'days'));
@@ -135,12 +128,12 @@ class Homepage extends Component {
 
     this.setState({
       days: days,
-      diff: diff,
-      first: '1st Observation Day: ' + first,
-      second: '2nd Observation Day: ' + second,
-      third: '3rd Observation Day: ' + third,
-      fourth: '4th Observation Day: ' + fourth,
-      mid: 'Mid-Course Feedback: ' + mid
+      first: first,
+      second: second,
+      third: third,
+      fourth: fourth,
+      mid: mid,
+      course: course
     });
   }
 
@@ -149,7 +142,7 @@ class Homepage extends Component {
     return (
       <div>
         <Form onPost={this.onPost.bind(this)} checkForm={this.checkForm}/>
-        <Results days={this.state.days} diff={this.state.diff} first={this.state.first} second={this.state.second} third={this.state.third} fourth={this.state.fourth} mid={this.state.mid} />
+        <Results days={this.state.days} first={this.state.first} second={this.state.second} third={this.state.third} fourth={this.state.fourth} mid={this.state.mid} course={this.state.course} />
       </div>
     )
   }
