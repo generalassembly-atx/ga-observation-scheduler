@@ -101,7 +101,7 @@ class Homepage extends Component {
         checked = true;
       }
     }
-    if (checked == true && this.refs.start !== '' && this.refs.end !== '' && this.refs.courses.value !== '') {
+    if (checked === true && this.refs.start !== '' && this.refs.end !== '' && this.refs.courses.value !== '') {
       this.props.onPost();
     }
   }
@@ -116,11 +116,11 @@ class Homepage extends Component {
         days.push(form.day[i].value);
       }
     }
-    const day1 = moment(form.start.value);
-    const day2 = moment(form.end.value);
+    // const day1 = moment(form.start.value);
+    // const day2 = moment(form.end.value);
     const diff = moment(form.end.value).diff(moment(form.start.value), 'days');
-    const firstMoment = moment(form.start.value).add(4, 'days');
-    const fourthMoment = moment(form.end.value).subtract(7, 'days');
+    // const firstMoment = moment(form.start.value).add(4, 'days');
+    // const fourthMoment = moment(form.end.value).subtract(7, 'days');
     this.checkFirstDay(moment(form.start.value).add(4, 'days'));
     this.checkSecondDay(moment(form.start.value).add(4, 'days').add(Math.floor(diff/3.5), 'days'));
     this.checkFourthDay(moment(form.end.value).subtract(7, 'days'));
