@@ -141,51 +141,30 @@ class Homepage extends Component {
   }
 
   addToCalendar () {
-  function listUpcomingEvents() {
-  var request = gapi.client.calendar.events.list({
-    'calendarId': 'primary',
-    'timeMin': (new Date()).toISOString(),
-    'showDeleted': false,
-    'singleEvents': true,
-    'maxResults': 10,
-    'orderBy': 'startTime'
-  });
-
-  console.log('request ', request);
-
-  request.execute(function(resp) {
-    var events = resp.items;
-    appendPre('Upcoming events:');
-
-    if (events.length > 0) {
-      for (let i = 0; i < events.length; i++) {
-        var event = events[i];
-        var when = event.start.dateTime;
-        if (!when) {
-          when = event.start.date;
-        }
-        appendPre(event.summary + ' (' + when + ')')
+    console.log('this ', this);
+    let date = moment(this.props.first, 'dddd, MMMM Do, YYYY').format()
+    console.log('date ', (moment(date).set('hour', 13)).format());
+    let event = {
+      'summary': this.props.course + ' observation',
+      'start': {
+        'dateTime': moment(date).set('hour', 13).format(),
+        'timeZone': 'America/Chicago'
+      },
+      'end': {
+        'dateTime': moment(date).set('hour', 14).format(),
+        'timeZone': 'America/Chicago'
       }
-    } else {
-      appendPre('No upcoming events found.');
     }
+    console.log('event ', event);
+    var request = gapi.client.calendar.events.insert({
+      'calendarId': 'primary',
+      'resource': event
+    });
 
-  });
-}
-
-/**
- * Append a pre element to the body containing the given message
- * as its text node.
- *
- * @param {string} message Text to be placed in pre element.
- */
-function appendPre(message) {
-  var pre = document.getElementById('output');
-  var textContent = document.createTextNode(message + '\n');
-  pre.appendChild(textContent);
-}
-listUpcomingEvents();
-}
+    request.execute(function(event) {
+      alert('Event added');
+    });
+  }
 
 
 
