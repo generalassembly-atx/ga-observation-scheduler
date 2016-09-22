@@ -25,7 +25,8 @@ class Homepage extends Component {
       third: null,
       fourth: null,
       mid: null,
-      course: null
+      course: null,
+      startTime: null
     };
   }
 
@@ -101,7 +102,7 @@ class Homepage extends Component {
         checked = true;
       }
     }
-    if (checked == true && this.refs.start !== '' && this.refs.end !== '' && this.refs.courses.value !== '') {
+    if (checked === true && this.refs.start !== '' && this.refs.end !== '' && this.refs.courses.value !== '' && this.refs.startTimes !== '') {
       this.props.onPost();
     }
   }
@@ -110,17 +111,20 @@ class Homepage extends Component {
     days = [];
     const form = document.getElementById('form');
     const course = form.courses.value;
+    const startTime = form.startTimes.value;
 
     for (var i = 0; i < form.day.length; i++) {
       if (form.day[i].checked) {
         days.push(form.day[i].value);
       }
     }
-    const day1 = moment(form.start.value);
-    const day2 = moment(form.end.value);
+
+
+    // const day1 = moment(form.start.value);
+    // const day2 = moment(form.end.value);
     const diff = moment(form.end.value).diff(moment(form.start.value), 'days');
-    const firstMoment = moment(form.start.value).add(4, 'days');
-    const fourthMoment = moment(form.end.value).subtract(7, 'days');
+    // const firstMoment = moment(form.start.value).add(4, 'days');
+    // const fourthMoment = moment(form.end.value).subtract(7, 'days');
     this.checkFirstDay(moment(form.start.value).add(4, 'days'));
     this.checkSecondDay(moment(form.start.value).add(4, 'days').add(Math.floor(diff/3.5), 'days'));
     this.checkFourthDay(moment(form.end.value).subtract(7, 'days'));
@@ -134,16 +138,45 @@ class Homepage extends Component {
       third: third,
       fourth: fourth,
       mid: mid,
-      course: course
+      course: course,
+      startTime: startTime
     });
   }
+
+  addToCalendar () {
+    let startTime = parseInt(this.props.startTime);
+    let endTime = startTime + 1;
+    let date = moment(this.props.first, 'dddd, MMMM Do, YYYY').format()
+    let event = {
+      'summary': this.props.course + ' observation',
+      'start': {
+        'dateTime': moment(date).set('hour', startTime).format(),
+        'timeZone': 'America/Chicago'
+      },
+      'end': {
+        'dateTime': moment(date).set('hour', endTime).format(),
+        'timeZone': 'America/Chicago'
+      }
+    }
+    
+    var request = gapi.client.calendar.events.insert({
+      'calendarId': 'primary',
+      'resource': event
+    });
+
+    request.execute(function(event) {
+      alert('Event added');
+    });
+  }
+
+
 
   render() {
 
     return (
       <div>
-        <Form onPost={this.onPost.bind(this)} checkForm={this.checkForm}/>
-        <Results days={this.state.days} first={this.state.first} second={this.state.second} third={this.state.third} fourth={this.state.fourth} mid={this.state.mid} course={this.state.course} />
+        <Form onPost={this.onPost.bind(this)} checkForm={this.checkForm} />
+        <Results days={this.state.days} first={this.state.first} second={this.state.second} third={this.state.third} fourth={this.state.fourth} mid={this.state.mid} course={this.state.course} startTime={this.state.startTime} addToCalendar={this.addToCalendar} />
       </div>
     )
   }

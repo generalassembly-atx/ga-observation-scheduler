@@ -33,6 +33,14 @@ class Form extends Component {
             <input type="checkbox" className="day" name="day" ref="day" value="Friday" /> Friday<span> </span>
             <input type="checkbox" className="day" name="day" ref="day" value="Saturday" /> Saturday<span> </span>
           </fieldset>
+          <fieldset className="startTimes" onChange={this.props.checkForm.bind(this)}>
+            <h5>Select start time</h5>
+            <select name="startTimes" form="form" ref="startTimes">
+              <option></option>
+              <option value="18" ref="18">6:00PM</option>
+              <option value="19" ref="19">7:00PM</option>
+            </select>
+          </fieldset>
         </form>
       </div>
     )
