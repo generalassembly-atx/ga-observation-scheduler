@@ -25,7 +25,8 @@ class Homepage extends Component {
       third: null,
       fourth: null,
       mid: null,
-      course: null
+      course: null,
+      startTime: null
     };
   }
 
@@ -101,7 +102,7 @@ class Homepage extends Component {
         checked = true;
       }
     }
-    if (checked === true && this.refs.start !== '' && this.refs.end !== '' && this.refs.courses.value !== '') {
+    if (checked === true && this.refs.start !== '' && this.refs.end !== '' && this.refs.courses.value !== '' && this.refs.startTimes !== '') {
       this.props.onPost();
     }
   }
@@ -110,6 +111,7 @@ class Homepage extends Component {
     days = [];
     const form = document.getElementById('form');
     const course = form.courses.value;
+    const startTime = form.startTimes.value;
 
     for (var i = 0; i < form.day.length; i++) {
       if (form.day[i].checked) {
@@ -136,26 +138,27 @@ class Homepage extends Component {
       third: third,
       fourth: fourth,
       mid: mid,
-      course: course
+      course: course,
+      startTime: startTime
     });
   }
 
   addToCalendar () {
-    console.log('this ', this);
+    let startTime = parseInt(this.props.startTime);
+    let endTime = startTime + 1;
     let date = moment(this.props.first, 'dddd, MMMM Do, YYYY').format()
-    console.log('date ', (moment(date).set('hour', 13)).format());
     let event = {
       'summary': this.props.course + ' observation',
       'start': {
-        'dateTime': moment(date).set('hour', 13).format(),
+        'dateTime': moment(date).set('hour', startTime).format(),
         'timeZone': 'America/Chicago'
       },
       'end': {
-        'dateTime': moment(date).set('hour', 14).format(),
+        'dateTime': moment(date).set('hour', endTime).format(),
         'timeZone': 'America/Chicago'
       }
     }
-    console.log('event ', event);
+    
     var request = gapi.client.calendar.events.insert({
       'calendarId': 'primary',
       'resource': event
@@ -173,7 +176,7 @@ class Homepage extends Component {
     return (
       <div>
         <Form onPost={this.onPost.bind(this)} checkForm={this.checkForm} />
-        <Results days={this.state.days} first={this.state.first} second={this.state.second} third={this.state.third} fourth={this.state.fourth} mid={this.state.mid} course={this.state.course} addToCalendar={this.addToCalendar} />
+        <Results days={this.state.days} first={this.state.first} second={this.state.second} third={this.state.third} fourth={this.state.fourth} mid={this.state.mid} course={this.state.course} startTime={this.state.startTime} addToCalendar={this.addToCalendar} />
       </div>
     )
   }
