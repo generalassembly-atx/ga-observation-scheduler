@@ -29,7 +29,7 @@ class Results extends Component {
             </tr>
           </tbody>
         </table>
-        <button className="btn btn-danger">Add to calendar</button>
+        <button className="btn btn-danger" onClick={this.props.addToCalendar}>Add to calendar</button>
       </div>
     )
   }
