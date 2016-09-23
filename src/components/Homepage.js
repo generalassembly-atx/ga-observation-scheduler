@@ -17,6 +17,8 @@ class Homepage extends Component {
   constructor(props) {
     super(props);
 
+    this.reset = this.reset.bind(this);
+
     this.state = {
       days: [],
       diff: null,
@@ -102,7 +104,7 @@ class Homepage extends Component {
         checked = true;
       }
     }
-    if (checked === true && this.refs.start !== '' && this.refs.end !== '' && this.refs.courses.value !== '' && this.refs.startTimes !== '') {
+    if (checked === true && this.refs.start !== '' && this.refs.end !== '' && this.refs.courses.value !== '' && this.refs.startTimes.value !== '') {
       this.props.onPost();
     }
   }
@@ -146,26 +148,125 @@ class Homepage extends Component {
   addToCalendar () {
     let startTime = parseInt(this.props.startTime);
     let endTime = startTime + 1;
-    let date = moment(this.props.first, 'dddd, MMMM Do, YYYY').format()
-    let event = {
+    let date1 = moment(this.props.first, 'dddd, MMMM Do, YYYY').format();
+    let date2 = moment(this.props.second, 'dddd, MMMM Do, YYYY').format()
+    let date3 = moment(this.props.third, 'dddd, MMMM Do, YYYY').format()
+    let date4 = moment(this.props.fourth, 'dddd, MMMM Do, YYYY').format()
+    let date5 = moment(this.props.mid, 'dddd, MMMM Do, YYYY').format()
+    let event1 = {
       'summary': this.props.course + ' observation',
       'start': {
-        'dateTime': moment(date).set('hour', startTime).format(),
+        'dateTime': moment(date1).set('hour', startTime).format(),
         'timeZone': 'America/Chicago'
       },
       'end': {
-        'dateTime': moment(date).set('hour', endTime).format(),
+        'dateTime': moment(date1).set('hour', endTime).format(),
         'timeZone': 'America/Chicago'
       }
     }
-    
-    var request = gapi.client.calendar.events.insert({
+
+    let request1 = gapi.client.calendar.events.insert({
       'calendarId': 'primary',
-      'resource': event
+      'resource': event1
     });
 
-    request.execute(function(event) {
-      alert('Event added');
+    request1.execute(function(event) {
+    });
+
+    let event2 = {
+      'summary': this.props.course + ' observation',
+      'start': {
+        'dateTime': moment(date2).set('hour', startTime).format(),
+        'timeZone': 'America/Chicago'
+      },
+      'end': {
+        'dateTime': moment(date2).set('hour', endTime).format(),
+        'timeZone': 'America/Chicago'
+      }
+    }
+
+    let request2 = gapi.client.calendar.events.insert({
+      'calendarId': 'primary',
+      'resource': event2
+    });
+
+    request2.execute(function(event) {
+    });
+
+    let event3 = {
+      'summary': this.props.course + ' observation',
+      'start': {
+        'dateTime': moment(date3).set('hour', startTime).format(),
+        'timeZone': 'America/Chicago'
+      },
+      'end': {
+        'dateTime': moment(date3).set('hour', endTime).format(),
+        'timeZone': 'America/Chicago'
+      }
+    }
+
+    let request3 = gapi.client.calendar.events.insert({
+      'calendarId': 'primary',
+      'resource': event3
+    });
+
+    request3.execute(function(event) {
+    });
+
+    let event4 = {
+      'summary': this.props.course + ' observation',
+      'start': {
+        'dateTime': moment(date4).set('hour', startTime).format(),
+        'timeZone': 'America/Chicago'
+      },
+      'end': {
+        'dateTime': moment(date4).set('hour', endTime).format(),
+        'timeZone': 'America/Chicago'
+      }
+    }
+
+    let request4 = gapi.client.calendar.events.insert({
+      'calendarId': 'primary',
+      'resource': event4
+    });
+
+    request4.execute(function(event) {
+    });
+
+    let event5 = {
+      'summary': this.props.course + ' mid course feedback',
+      'start': {
+        'dateTime': moment(date5).set('hour', startTime).format(),
+        'timeZone': 'America/Chicago'
+      },
+      'end': {
+        'dateTime': moment(date5).set('hour', endTime).format(),
+        'timeZone': 'America/Chicago'
+      }
+    }
+
+    let request5 = gapi.client.calendar.events.insert({
+      'calendarId': 'primary',
+      'resource': event5
+    });
+
+    request5.execute(function(event) {
+    });
+
+    alert('Five events have been added to your calendar');
+  }
+
+  reset() {
+    document.getElementById('form').reset();
+    this.setState({
+      days: [],
+      first: null,
+      second: null,
+      third: null,
+      fourth: null,
+      mid: null,
+      course: null,
+      startTime: null
     });
   }
 
@@ -175,8 +276,11 @@ class Homepage extends Component {
 
     return (
       <div>
+        <h1>Emily's Observations Scheduler</h1>
         <Form onPost={this.onPost.bind(this)} checkForm={this.checkForm} />
         <Results days={this.state.days} first={this.state.first} second={this.state.second} third={this.state.third} fourth={this.state.fourth} mid={this.state.mid} course={this.state.course} startTime={this.state.startTime} addToCalendar={this.addToCalendar} />
+        <br></br>
+        <button className="btn btn-primary" onClick={this.reset}>Start over</button>
       </div>
     )
   }

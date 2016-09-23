@@ -7,6 +7,7 @@ class Form extends Component {
       <div>
         <form onSubmit={this.props.onPost} id="form">
           <fieldset className="course" onChange={this.props.checkForm.bind(this)}>
+            <h5>Select the course</h5>
             <select name="courses" form="form" ref="courses">
               <option></option>
               <option value="Visual Design" ref="vd">Visual Design</option>
@@ -19,20 +20,24 @@ class Form extends Component {
               <option value="JavaScript" ref="js">JavaScript</option>
             </select>
           </fieldset>
+          <br></br>
           <fieldset className="dates" onChange={this.props.checkForm.bind(this)}>
-            <input type="date" placeholder="Enter Start Date" name="start" ref="start" />
-            <input type="date" placeholder="Enter End Date" name="end" ref="end" />
+            <h5>Enter start date & end date</h5>
+            <input type="date" name="start" ref="start" />
+            <input type="date" name="end" ref="end" />
           </fieldset>
           <br></br>
           <fieldset className="days" ref="days" onChange={this.props.checkForm.bind(this)} >
-            <input type="checkbox" className="day" name="day" ref="day" value="Sunday" /> Sunday<span> </span>
-            <input type="checkbox" className="day" name="day" ref="day" value="Monday" /> Monday<span> </span>
-            <input type="checkbox" className="day" name="day" ref="day" value="Tuesday" /> Tuesday<span> </span>
-            <input type="checkbox" className="day" name="day" ref="day" value="Wednesday" />Wednesday<span> </span>
-            <input type="checkbox" className="day" name="day" ref="day" value="Thursday" /> Thursday<span> </span>
-            <input type="checkbox" className="day" name="day" ref="day" value="Friday" /> Friday<span> </span>
-            <input type="checkbox" className="day" name="day" ref="day" value="Saturday" /> Saturday<span> </span>
+            <h5>Choose days of the week</h5>
+            <input type="checkbox" className="day" name="day" ref="day" value="Sunday" /> Sunday<span> &nbsp;</span>
+            <input type="checkbox" className="day" name="day" ref="day" value="Monday" /> Monday<span> &nbsp;</span>
+            <input type="checkbox" className="day" name="day" ref="day" value="Tuesday" /> Tuesday<span> &nbsp;</span>
+            <input type="checkbox" className="day" name="day" ref="day" value="Wednesday" /> Wednesday<span> &nbsp;</span>
+            <input type="checkbox" className="day" name="day" ref="day" value="Thursday" /> Thursday<span> &nbsp;</span>
+            <input type="checkbox" className="day" name="day" ref="day" value="Friday" /> Friday<span> &nbsp;</span>
+            <input type="checkbox" className="day" name="day" ref="day" value="Saturday" /> Saturday<span> &nbsp;</span>
           </fieldset>
+          <br></br>
           <fieldset className="startTimes" onChange={this.props.checkForm.bind(this)}>
             <h5>Select start time</h5>
             <select name="startTimes" form="form" ref="startTimes">

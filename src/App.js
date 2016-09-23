@@ -48,22 +48,24 @@ module.exports = React.createClass({
         if (this.state.loggedInUser)
             loggedInUserThumb = <img src={this.state.loggedInUser.thumb} />
 
-        var toggleLoginButton = <button onClick={this.toggleSignIn}>Login to Google</button>
+        var toggleLoginButton = <button onClick={this.toggleSignIn}>Grant Access</button>
 
         if (this.state.finishedLoading) {
 
             if (this.state.isLoggedIn) {
 
                 return <div>
-                {loggedInUserThumb}
-                {this.state.loggedInUser.name}
-                    <hr />
-                    You're now free to use the Google APIs!
+
                     <Homepage />
                 </div>
             }
             else
-                return toggleLoginButton;
+                return (
+                  <div>
+                    <h4>You must allow access to your Google calendar first</h4>
+                    {toggleLoginButton}
+                  </div>
+                )
         }
         else {
             return <div>Loading...</div>
