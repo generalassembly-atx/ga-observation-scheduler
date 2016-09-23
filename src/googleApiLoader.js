@@ -80,8 +80,6 @@ module.exports = {
         var options = new gapi.auth2.SigninOptionsBuilder({
             scope: "https://www.googleapis.com/auth/calendar"
         });
-        console.log('options ', options);
-        console.log('scopes ', gapi.auth2);
 
         this.getAuth2().signIn(options).then(function (success) {
         }, function (fail) {
