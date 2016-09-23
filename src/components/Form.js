@@ -23,7 +23,7 @@ class Form extends Component {
           <br></br>
           <fieldset className="dates" onChange={this.props.checkForm.bind(this)}>
             <h5>Enter start date & end date</h5>
-            <input type="date" name="start" ref="start" />
+            <input type="date" name="start" ref="start" /><span> </span>
             <input type="date" name="end" ref="end" />
           </fieldset>
           <br></br>
